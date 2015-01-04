@@ -1,0 +1,46 @@
+
+Feast - an iOS app to make it easier to set-up dinners/drinks with friends or people in the area around you
+
+App was developed as a final project for CIS 195. Parse credentials removed.
+
+Authors: Jeffrey Shih (jeshih)
+
+Features
+1) Login / Sign-up / Reset Password
+	- Used Parse API for user creation
+	- Takes in a user's name, phone-number, email (used as username), and password
+	- Used checking on the different fields. The app will check to make sure all fields have some input in it. In addition, users are expected to confirm their password before moving on
+	- All textfields had a delegate and a gesture recognizer that would cancel the editing if a user tapped anywhere but the textfield. In addition, the keyboards were linked, so that they could hit 'Next' and move onto the next field.
+	- Login was implemented so that it'd wait to see if the login credentials are valid. If not, a UIAlertController would appear and indicate that credentials are incorrect. If login succeeded, then user is brought to the MainViewController via segue.
+	- Reset Password also used the Parse API in order to send a password reset email to the entered email address.
+2) Submission of Availability
+	- The different time ranges a user could choose between are displayed on a UIPicker - the default set to 'Anytime'.
+	- Uses CoreLocation to track where the user was when they submitted the availability. However, this was intended to be used to rank the 'Availability' list by distance to user. In the end, the current location was not used.
+	- Used Parse API to store all of the information submitted
+3) Viewing Availability
+	- Queried Parse Database to view all submitted 'Availabilities'. After the query is complete, some processing is done so that it only shows 'Availabilities' that are not taken as well as all 'Availabilities' that do not belong to  the current user (it wouldn't make sense for someone to decide to eat with themself through an App)
+	- Viewing an 'Availability' shows a photo of the user. This is so that 
+4) Viewing of current scheduled 'feasts'
+	- Queries the Parse Database set-up to view all scheduled 'feasts'
+	- When viewing a scheduled feast, it's similar to viewing the 'Availabilties'
+5) Updating of current Profile
+	- Displayed user's information. Future plan would be to be able to modify some of this info, such as phone number, which would then update within the Database.
+	- Users can updload a photo, either choosing from their photo library or by taking a photo. A UIAcionSheet is brought up to allow the users to choose from these 2 options. App will ask permission from the user.
+	- The profile mainly used the Parse API to store the pictures, but used the UIImagePickerController to allow the user to pick a picture from his or her library or to take a picture with the camera.
+6) Directions to location
+	- Performs an MKLocalSearch with either the preference or the location. Will prioritize location to the preference the person put down. If they put no location, it will perform the search on the preference. Places an annotation down for each item found.
+	- Uses CoreLocation and Mapkit libraries to display user's current coordinate on the MapView. When the user clicks on an annotation, a button for information will appear. Click on said button will launch the Maps application and have the address selected.
+
+
+Features discussed but not implemented
+1) Accepting feasts
+	- I simply ran out of time to implement this feature. If i were to implement it, I likely would've made another Parse class that tracked all of the different requests. Each object in the class would contain the information from the 'Availability' object. The button to accept would add the accepted feast to the 'Feast' class and delete it from the 'Request' class. Declining would simply delete the request and re-add it back to the 'Availability' class
+2) Push Notifications
+	- Because we did not control the iOS Developer account, I could not enable Push Notifications. 
+	- I likely would've followed the Parse tutorial for Push Notifications. For push notifications, I would've wanted to push a notification to the person who's 'Availability' had been selected and asked them to Accept or Reject it
+3) Launch messaging app within app to text other person
+	- This was a reach goal when I put it into the project proposal, so I held this off for last. I simply ran out of time to implement this.
+	- I think I would've done in a way similar to how I brought up the Apple Maps app, and open the messaging app and have the application automatically input the other user's phone-number
+5) Friends list / Facebook
+	- I didn't implement Facebook since I was able to get a basic implementation working with just the Parse Database. In addition, I decided to switch the design from just friends to hanging-out with anyone. However, to implement this, Parse has a very straightforward plug-in to integrate Facebook users with users who signed up through email. IN addition, I would also just change the 'Availability' table to only show 'Availabilities' from friends.
+
