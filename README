@@ -32,7 +32,7 @@ Features
 	- Uses CoreLocation and Mapkit libraries to display user's current coordinate on the MapView. When the user clicks on an annotation, a button for information will appear. Click on said button will launch the Maps application and have the address selected.
 
 
-Features discussed but not implemented
+Features I planned to add but did not have time to implement
 1) Accepting feasts
 	- I simply ran out of time to implement this feature. If i were to implement it, I likely would've made another Parse class that tracked all of the different requests. Each object in the class would contain the information from the 'Availability' object. The button to accept would add the accepted feast to the 'Feast' class and delete it from the 'Request' class. Declining would simply delete the request and re-add it back to the 'Availability' class
 2) Push Notifications
